@@ -13,8 +13,6 @@ export default defineConfig({
     file: 'dist/tlib-cli.js',
     sourcemap: !production
   },
-  plugins: [commonjs(), typescript(), nodeResolve({ browser: true })].concat(
-    !production ? [] : [terser()]
-  ),
+  plugins: [commonjs(), typescript(), nodeResolve(), terser()],
   watch: { include: 'src/**' }
 })
