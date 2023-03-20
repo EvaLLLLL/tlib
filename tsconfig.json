@@ -1,24 +1,18 @@
 {
+  "include": ["src/**/*.ts"],
+  "exclude": ["dist", "node_modules"],
   "compilerOptions": {
-    "outDir": "dist",
-    "declaration": true,
-    "declarationDir": "types",
-    "target": "esnext",
-    "module": "esnext",
-    "esModuleInterop": true,
-    "moduleResolution": "nodenext",
-    "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "resolveJsonModule": true,
+    "outDir": "dist",
+    "target": "es2022",
+    "module": "es2022",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
     "skipLibCheck": true,
-    "paths": {
-      "@lib/*": ["./lib/*"]
-    },
-    "plugins": [
-      { "transform": "typescript-transform-paths" },
-      { "transform": "typescript-transform-paths", "afterDeclarations": true }
-    ]
-  },
-  "include": ["lib/**/*.ts"],
-  "exclude": ["dist", "node_modules"]
+    "declaration": false,
+    "sourceMap": false,
+    "noUnusedLocals": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
+  }
 }
