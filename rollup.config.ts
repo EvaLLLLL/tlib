@@ -13,6 +13,11 @@ export default defineConfig({
     file: 'dist/tlib-cli.js',
     sourcemap: !production
   },
-  plugins: [commonjs(), typescript(), nodeResolve(), terser()],
+  plugins: [
+    commonjs(),
+    typescript(),
+    nodeResolve({ browser: false }),
+    terser()
+  ],
   watch: { include: 'src/**' }
 })

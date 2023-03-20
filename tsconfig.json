@@ -12,7 +12,6 @@
     "declaration": false,
     "sourceMap": false,
     "noUnusedLocals": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "forceConsistentCasingInFileNames": true
   }
 }
