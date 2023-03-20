@@ -39,11 +39,6 @@ async function init() {
 
     const write = (file: string, content?: string) => {
       const targetPath = path.join(root, renameFiles[file] ?? file)
-      console.log({
-        templateDir,
-        targetPath,
-        templateFile: path.join(templateDir, file)
-      })
       if (content) {
         fs.writeFileSync(targetPath, content)
       } else {

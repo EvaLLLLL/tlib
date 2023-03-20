@@ -5,8 +5,9 @@ Zero config for building a Typescript library.
 ### Usage
 
 ```
-npx tlib <libraryname>
+npx tlib-cli
 ```
+
 That's it, things will setup.
 
 ### NPM scripts
@@ -18,7 +19,7 @@ That's it, things will setup.
 
 ### Features
 
-Already includes: 
+Already includes:
 
 - [x] Module bundler: RollupJs
 - [x] Code style: Eslint + Prettier
