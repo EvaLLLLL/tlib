@@ -1,3 +1,4 @@
+import chalk from 'chalk'
 import fs from 'node:fs'
 import path from 'node:path'
 import prompts from 'prompts'
@@ -57,6 +58,10 @@ async function init() {
 
     pkg.name = targetDir
     write('package.json', JSON.stringify(pkg, null, 2) + '\n')
+
+    console.log(
+      chalk.greenBright(`${targetDir} created successfully! Happy Coding!`)
+    )
   } catch (e) {
     console.log(e)
   }

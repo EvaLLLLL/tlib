@@ -28,6 +28,7 @@
     "rollup": "^3.19.1"
   },
   "dependencies": {
+    "chalk": "^5.2.0",
     "typescript": "^5.0.2"
   }
 }
