@@ -1,4 +1,3 @@
-export { sum } from './sum'
-export { run } from './run'
-export { theAnswer } from './theAnswer'
-export type { IParams, TestType } from './types'
+import { IParams } from './types'
+
+export const sum = ({ a, b }: IParams) => a + b

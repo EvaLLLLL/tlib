@@ -9,7 +9,8 @@ const renameFiles: Record<string, string> = {
   _gitignore: '.gitignore',
   _eslintrc: '.eslintrc.js',
   _prettierrc: '.prettierrc.js',
-  _eslintignore: '.eslintignore'
+  _eslintignore: '.eslintignore',
+  _npmignore: '.npmignore'
 }
 
 async function init() {
@@ -56,6 +57,10 @@ async function init() {
     )
 
     pkg.name = targetDir
+    pkg.main = `dist/${targetDir}.umd.js`
+    pkg.module = `dist/${targetDir}.es5.js`
+    pkg.typings = `dist/types/${targetDir}.d.ts`
+
     write('package.json', JSON.stringify(pkg, null, 2) + '\n')
 
     console.log(`${targetDir} created successfully! Happy Coding!`)

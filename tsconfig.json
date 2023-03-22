@@ -1,6 +1,6 @@
 {
   "include": ["src/**/*.ts"],
-  "exclude": ["dist", "node_modules"],
+  "exclude": ["dist", "node_modules", "template"],
   "compilerOptions": {
     "strict": true,
     "outDir": "dist",
@@ -10,7 +10,7 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "declaration": false,
-    "sourceMap": false,
+    "sourceMap": true,
     "noUnusedLocals": true,
     "forceConsistentCasingInFileNames": true
   }
