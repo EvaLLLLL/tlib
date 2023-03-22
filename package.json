@@ -17,6 +17,7 @@
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-terser": "^0.4.0",
     "@rollup/plugin-typescript": "^11.0.0",
+    "@types/cross-spawn": "^6.0.2",
     "@types/node": "^18.15.3",
     "@types/prompts": "^2.4.3",
     "prettier": "^2.8.4",
@@ -25,7 +26,8 @@
     "tslib": "^2.5.0"
   },
   "dependencies": {
-    "chalk": "^5.2.0",
+    "cross-spawn": "^7.0.3",
+    "kolorist": "^1.7.0",
     "typescript": "^5.0.2"
   }
 }

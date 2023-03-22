@@ -10,7 +10,7 @@ export default defineConfig({
   input: './src/index.ts',
   output: {
     format: 'es',
-    file: 'dist/tlib-cli.js',
+    file: 'dist/tlib-cli.mjs',
     sourcemap: !production
   },
   plugins: [

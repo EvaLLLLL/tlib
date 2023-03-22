@@ -1,6 +1,8 @@
+import { lightGreen, lightCyan } from 'kolorist'
 import fs from 'node:fs'
 import path from 'node:path'
 import prompts from 'prompts'
+import spawn from 'cross-spawn'
 import { fileURLToPath } from 'node:url'
 
 const cwd = process.cwd()
@@ -16,7 +18,7 @@ const renameFiles: Record<string, string> = {
 async function init() {
   let targetDir = defaultTargetDir
   try {
-    await prompts([
+    const { pkgManager } = await prompts([
       {
         type: 'text',
         name: 'projectName',
@@ -25,6 +27,17 @@ async function init() {
         onState: (state) => {
           targetDir = state.value || defaultTargetDir
         }
+      },
+      {
+        type: 'select',
+        name: 'pkgManager',
+        message: 'Package manager:',
+        initial: 0,
+        choices: [
+          { title: 'npm', value: 'npm' },
+          { title: 'yarn', value: 'yarn' },
+          { title: 'pnpm', value: 'pnpm' }
+        ]
       }
     ])
 
@@ -63,7 +76,26 @@ async function init() {
 
     write('package.json', JSON.stringify(pkg, null, 2) + '\n')
 
-    console.log(`${targetDir} created successfully! Happy Coding!`)
+    const useYarn = pkgManager === 'yarn'
+    const child = spawn(
+      pkgManager,
+      ['install'].concat(
+        !useYarn ? ['--prefix', targetDir] : ['--cwd', targetDir]
+      ),
+      {
+        stdio: 'inherit'
+      }
+    )
+
+    child.on('close', (code) => {
+      if (code !== 0) {
+        console.log('install with something wrong')
+        process.exit(1)
+      }
+
+      printSuccessInfo(pkgManager, targetDir)
+      process.exit(0)
+    })
   } catch (e) {
     console.log(e)
   }
@@ -85,6 +117,32 @@ function copyDir(srcDir: string, destDir: string) {
     const destFile = path.resolve(destDir, file)
     copy(srcFile, destFile)
   }
+}
+
+function printSuccessInfo(pkgManager: string, pkgName: string) {
+  console.log()
+
+  const useYarn = pkgManager === 'yarn'
+
+  console.log(`${lightGreen('Success!')} Created ${pkgName} at ${pkgName}`)
+  console.log('Inside that directory, you can run several commands:')
+  console.log()
+  console.log(lightCyan(`  ${pkgManager} ${useYarn ? '' : 'run '}dev`))
+  console.log('    Starts the development server.')
+  console.log()
+  console.log(lightCyan(`  ${pkgManager} ${useYarn ? '' : 'run '}build:dev`))
+  console.log(
+    '    Builds the libarary for development with sourcemap and no terser.'
+  )
+  console.log()
+  console.log(lightCyan(`  ${pkgManager} ${useYarn ? '' : 'run '}build:pro`))
+  console.log('    Builds the libarary for production.')
+  console.log()
+  console.log('You can begin by typing:')
+  console.log()
+  console.log(lightCyan('  cd'), pkgName)
+  console.log(`  ${lightCyan(`${pkgManager} ${useYarn ? '' : 'run '}dev`)}`)
+  process.exit(0)
 }
 
 init().catch((e) => {

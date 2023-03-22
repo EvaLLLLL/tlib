@@ -3,9 +3,8 @@
   "exclude": ["dist", "node_modules", "template"],
   "compilerOptions": {
     "strict": true,
-    "outDir": "dist",
-    "target": "es2022",
-    "module": "es2022",
+    "target": "ESNext",
+    "module": "ESNext",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,
