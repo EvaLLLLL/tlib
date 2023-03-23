@@ -79,7 +79,21 @@ async function init() {
     write('package.json', JSON.stringify(pkg, null, 2) + '\n')
 
     const useYarn = pkgManager === 'yarn'
-    const child = spawn(
+
+    const gitInitResult = spawn.sync(
+      'git',
+      ['init', '--initial-branch', 'main', targetDir],
+      {
+        stdio: 'inherit'
+      }
+    )
+
+    if (gitInitResult.status !== 0) {
+      console.log('install with something wrong')
+      process.exit(1)
+    }
+
+    const installResult = spawn.sync(
       pkgManager,
       ['install'].concat(
         !useYarn ? ['--prefix', targetDir] : ['--cwd', targetDir]
@@ -89,15 +103,13 @@ async function init() {
       }
     )
 
-    child.on('close', (code) => {
-      if (code !== 0) {
-        console.log('install with something wrong')
-        process.exit(1)
-      }
+    if (installResult.status !== 0) {
+      console.log('install with something wrong')
+      process.exit(1)
+    }
 
-      printSuccessInfo(pkgManager, targetDir)
-      process.exit(0)
-    })
+    printSuccessInfo(pkgManager, targetDir)
+    process.exit(0)
   } catch (e) {
     console.log(e)
   }
@@ -133,9 +145,7 @@ function printSuccessInfo(pkgManager: string, pkgName: string) {
   console.log('    Starts the development server.')
   console.log()
   console.log(lightCyan(`  ${pkgManager} ${useYarn ? '' : 'run '}test`))
-  console.log(
-    '    Test the test cases under the test/ directory.'
-  )
+  console.log('    Test the test cases under the test/ directory.')
   console.log()
   console.log(lightCyan(`  ${pkgManager} ${useYarn ? '' : 'run '}build:dev`))
   console.log(
