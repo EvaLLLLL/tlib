@@ -1,28 +1,46 @@
 {
-  "name": "tlib",
+  "name": "test-tlib",
   "version": "1.0.0",
   "license": "MIT",
-  "main": "dist/tlib.umd.js",
-  "module": "dist/tlib.es5.js",
-  "typings": "dist/types/tlib.d.ts",
+  "main": "dist/test-tlib.umd.js",
+  "module": "dist/test-tlib.es5.js",
+  "typings": "dist/types/test-tlib.d.ts",
   "scripts": {
-    "lint": "eslint --fix 'lib/**/*.ts'",
+    "test": "jest",
     "dev": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --bundleConfigAsCjs --watch",
-    "build:dev": "rm -rf dist && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --bundleConfigAsCjs",
-    "build:pro": "rm -rf dist && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --bundleConfigAsCjs --environment BUILD_MODE:production"
+    "build:dev": "rimraf dist && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --bundleConfigAsCjs",
+    "build:pro": "rimraf dist && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --bundleConfigAsCjs --environment BUILD_MODE:production",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "lib/**/*.{ts,js}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   },
   "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.21.0",
+    "@commitlint/cli": "^17.5.0",
+    "@commitlint/config-conventional": "^17.4.4",
     "@rollup/plugin-alias": "^4.0.3",
     "@rollup/plugin-commonjs": "^24.0.1",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-terser": "^0.4.0",
     "@rollup/plugin-typescript": "^11.0.0",
+    "@types/jest": "^29.5.0",
     "@types/node": "^18.15.3",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
     "@typescript-eslint/parser": "^5.55.0",
+    "babel-jest": "^29.5.0",
     "eslint": "^8.36.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
+    "jest": "^29.5.0",
+    "lint-staged": "^13.2.0",
     "prettier": "^2.8.4",
+    "rimraf": "^4.4.1",
     "rollup": "^3.19.1",
     "ts-node": "^10.9.1",
     "ttypescript": "^1.5.15",

@@ -8,6 +8,8 @@ import { fileURLToPath } from 'node:url'
 const cwd = process.cwd()
 const defaultTargetDir = 'typescript-lib'
 const renameFiles: Record<string, string> = {
+  _git: '.git',
+  _husky: '.husky',
   _gitignore: '.gitignore',
   _eslintrc: '.eslintrc.js',
   _prettierrc: '.prettierrc.js',
@@ -129,6 +131,11 @@ function printSuccessInfo(pkgManager: string, pkgName: string) {
   console.log()
   console.log(lightCyan(`  ${pkgManager} ${useYarn ? '' : 'run '}dev`))
   console.log('    Starts the development server.')
+  console.log()
+  console.log(lightCyan(`  ${pkgManager} ${useYarn ? '' : 'run '}test`))
+  console.log(
+    '    Test the test cases under the test/ directory.'
+  )
   console.log()
   console.log(lightCyan(`  ${pkgManager} ${useYarn ? '' : 'run '}build:dev`))
   console.log(

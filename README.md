@@ -1,31 +1,39 @@
-## TLIB
+# TLIB
 
 Zero config for building a Typescript library.
 
-### Usage
+## Usage
 
-```
+```shell
 npx tlib-cli
 ```
 
-That's it, things will setup.
+After entering the project name and package manager, it will automatically configure and install the related dependencies.
 
-### NPM scripts
+## NPM scripts
 
-- `yarn lint`: Lints code
-- `yarn dev`: Run `yarn build:dev` in watch mode
-- `yarn build:dev`: Generate bundles and typings with sourcemap
-- `yarn build:pro`: Generate minified bundles and typings with terser
+- `dev`: Run `build:dev` in watch mode
 
-### Features
+- `test`: Test the test cases under the test/ directory
+
+- `build:dev`: Generate bundles and typings with sourcemap
+
+- `build:pro`: Generate minified bundles and typings with terser
+
+## Features
 
 Already includes:
 
 - [x] Module bundler: RollupJs
+
 - [x] Code style: Eslint + Prettier
-- [ ] Test: Jest
+
+- [x] Code consistency: lint-staged + husky + commitlint
+
+- [x] Test: Jest
+
 - [ ] Automatic releases and changelog
 
-### License
+## License
 
 MIT
